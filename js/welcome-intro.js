@@ -1,16 +1,14 @@
 /* 새로운 환영 장면: AICA의 브랜드 로고에서 실제 히어로로 이어지는 하나의 창.
-   세션 첫 홈 진입과 히어로에서 새로고침할 때 재생합니다. */
+   주소로 홈에 진입하거나 히어로에서 새로고침할 때 재생합니다. */
 (() => {
   'use strict';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   if (document.documentElement.classList.contains('space-arrival')) return;
-  const seenKey = 'aica:welcome:2026-09';
   const navigationType = performance.getEntriesByType('navigation')[0]?.type;
   const isReload = navigationType === 'reload';
-  if (reduced.matches || document.visibilityState === 'hidden' ||
+  if (reduced.matches ||
       (location.hash && location.hash !== '#top') ||
       navigationType === 'back_forward') return;
-  try { if (!isReload && sessionStorage.getItem(seenKey)) return; } catch { /* 저장이 막혀도 진입 가능 */ }
 
   const root = document.documentElement;
   const entry = document.createElement('div');
@@ -33,6 +31,7 @@
   let frame = 0;
   let watchdog = 0;
   let start = null;
+  let prepared = false;
   const siblings = new Map();
   const previousFocus = document.activeElement;
   const brand = entry.querySelector('.aica-welcome__brand');
@@ -56,7 +55,6 @@
     document.removeEventListener('DOMContentLoaded', prepare);
     document.removeEventListener('keydown', onKey, true);
     document.removeEventListener('visibilitychange', onVisibility);
-    window.removeEventListener('resize', finish);
     window.removeEventListener('pagehide', finish);
     reduced.removeEventListener('change', finish);
     siblings.forEach((inert, element) => { element.inert = inert; });
@@ -73,7 +71,17 @@
     else if (event.key === 'Tab') { event.preventDefault(); skip.focus({preventScroll: true}); }
     else if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key) && event.target !== skip) event.preventDefault();
   }
-  function onVisibility() { if (document.visibilityState === 'hidden') finish(); }
+  function onVisibility() {
+    cancelAnimationFrame(frame);
+    clearTimeout(watchdog);
+    if (finished || !prepared) return;
+    // 백그라운드 탭에서는 재생을 기다리고, 실제로 보는 순간부터 시작합니다.
+    start = null;
+    if (document.visibilityState === 'visible') {
+      watchdog = setTimeout(finish, 4500);
+      frame = requestAnimationFrame(tick);
+    }
+  }
   function prepare() {
     if (finished) return;
     const hero = document.querySelector('.hero');
@@ -84,7 +92,8 @@
       siblings.set(child, child.inert);
       child.inert = true;
     }
-    frame = requestAnimationFrame(tick);
+    prepared = true;
+    onVisibility();
   }
   function tick(now) {
     if (finished) return;
@@ -117,12 +126,9 @@
     skip.addEventListener('click', finish);
     document.addEventListener('keydown', onKey, true);
     document.addEventListener('visibilitychange', onVisibility);
-    window.addEventListener('resize', finish, {once: true});
     window.addEventListener('pagehide', finish, {once: true});
     reduced.addEventListener('change', finish, {once: true});
     // 어떤 예외에서도 가림막과 입력 잠금이 남지 않게 합니다.
-    watchdog = setTimeout(finish, 4500);
-    try { sessionStorage.setItem(seenKey, '1'); } catch { /* 저장 없이도 정상 종료 */ }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', prepare, {once: true});
     else prepare();
   } catch { finish(); }

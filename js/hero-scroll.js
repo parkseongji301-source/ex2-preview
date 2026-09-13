@@ -13,7 +13,11 @@
     if ('ResizeObserver' in window) new ResizeObserver(sizeFooter).observe(footer);
   }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const desktop = matchMedia('(hover: hover) and (pointer: fine)');
+  const desktop = matchMedia('(any-hover: hover) and (any-pointer: fine)');
+  const nowHeader = next.querySelector('.now-sticky-header');
+  // sticky 요소의 현재 좌표 대신 변하지 않는 섹션 내부 시작 위치를 사용합니다.
+  const compactTop = () => topOf(next) + parseFloat(getComputedStyle(next).paddingTop);
+  const compactStop = {getBoundingClientRect: () => ({top: compactTop() - window.scrollY})};
   const duration = 950;
   const upwardThreshold = 64;
   let frame = 0, moving = false, settling = false, lastWheel = -Infinity;
@@ -88,6 +92,13 @@
     if (up) {
       event.preventDefault();
       travel(hero);
+      return;
+    }
+    // NOW 진입 다음 휠은 헤더가 접히는 위치에 정차합니다.
+    // 큰 휠 입력이 첫 콘텐츠까지 건너뛰지 않도록 남은 입력도 흡수합니다.
+    if (event.deltaY > 0 && nowHeader && position >= nextTop - 2 && position < compactTop() - 2) {
+      event.preventDefault();
+      travel(compactStop);
       return;
     }
     const down = event.deltaY > 0 && position >= topOf(hero) - 2 && position < nextTop - 2;

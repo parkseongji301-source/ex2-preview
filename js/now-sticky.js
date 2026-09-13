@@ -57,7 +57,7 @@
     compact = false;
     [eyebrow, description].forEach(element => element.setAttribute('aria-hidden', 'false'));
     const height = content.getBoundingClientRect().height;
-    threshold = header.getBoundingClientRect().top + window.scrollY;
+    threshold = section.getBoundingClientRect().top + window.scrollY + parseFloat(getComputedStyle(section).paddingTop);
     const barHeight = parseFloat(getComputedStyle(header).getPropertyValue('--now-bar-height'));
     header.style.setProperty('--now-header-gap', Math.max(0, height - barHeight) + 'px');
     header.classList.add('is-ready');
