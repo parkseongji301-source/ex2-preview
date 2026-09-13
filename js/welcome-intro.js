@@ -19,13 +19,7 @@
   entry.setAttribute('aria-modal', 'true');
   entry.setAttribute('aria-label', 'AICA 인공지능사관학교에 오신 것을 환영합니다');
   entry.innerHTML = `
-    <svg class="aica-welcome__curtain" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <defs><mask id="aica-welcome-window" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%" style="mask-type:luminance">
-        <rect width="100%" height="100%" fill="white" />
-        <circle class="aica-welcome__opening" cx="0" cy="0" r="0" fill="black" />
-      </mask></defs>
-      <rect width="100%" height="100%" fill="#102638" mask="url(#aica-welcome-window)" />
-    </svg>
+    <div class="aica-welcome__curtain" aria-hidden="true"></div>
     <div class="aica-welcome__brand" role="progressbar" aria-label="브랜드 로고 완성" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
       <div class="aica-welcome__word"><span>AICA</span><svg class="aica-welcome__logo" viewBox="0 0 175 139" aria-hidden="true" focusable="false"><path d="M14 43L83 15L153 43L125 54V47L137 42L83 21L29 42L40 47V54Z"/><path d="M44 44H122V110H104V62H62V110H44Z"/><path d="M77 74H89V85H77Z"/><path d="M77 92H89V111L97 131H69L77 111Z"/><path d="M140 46H144V70H140Z"/><circle cx="142" cy="74" r="5"/></svg></div>
       <p class="aica-welcome__name">인공지능사관학교</p>
@@ -39,8 +33,6 @@
   let frame = 0;
   let watchdog = 0;
   let start = null;
-  let openingStarted = false;
-  let centerX = 0, centerY = 0, radius = 0, seed = 0;
   const siblings = new Map();
   const previousFocus = document.activeElement;
   const brand = entry.querySelector('.aica-welcome__brand');
@@ -48,10 +40,10 @@
   const name = entry.querySelector('.aica-welcome__name');
   const logo = entry.querySelector('.aica-welcome__logo');
   const strokes = [...logo.children];
-  const opening = entry.querySelector('.aica-welcome__opening');
+  const curtain = entry.querySelector('.aica-welcome__curtain');
   const skip = entry.querySelector('button');
   const hold = 2100;
-  const duration = 850;
+  const duration = 1100;
   const clamp = value => Math.min(1, Math.max(0, value));
   const ease = value => value * value * (3 - 2 * value);
 
@@ -94,16 +86,6 @@
     }
     frame = requestAnimationFrame(tick);
   }
-  function measureOpening() {
-    // 서체 교체 이후, 열리는 순간의 완성된 로고 중심을 한 번만 측정합니다.
-    const rect = logo.getBoundingClientRect();
-    centerX = rect.left + rect.width / 2;
-    centerY = rect.top + rect.height / 2;
-    seed = rect.width / 2;
-    radius = Math.hypot(Math.max(centerX, innerWidth - centerX), Math.max(centerY, innerHeight - centerY)) + 4;
-    opening.setAttribute('cx', centerX);
-    opening.setAttribute('cy', centerY);
-  }
   function tick(now) {
     if (finished) return;
     if (start === null) start = now;
@@ -119,13 +101,10 @@
     });
     const value = Math.round(drawn * 100);
     brand.setAttribute('aria-valuenow', String(value));
-    // 브랜드가 먼저 물러나고, 하나의 원이 화면 모서리까지 열립니다.
-    brand.style.opacity = 1 - ease(clamp((elapsed - hold) / 300));
-    skip.style.opacity = 1 - ease(clamp((elapsed - hold - 650) / 350));
-    if (elapsed >= hold) {
-      if (!openingStarted) { measureOpening(); openingStarted = true; }
-      opening.setAttribute('r', seed + (radius - seed) * ease(progress));
-    }
+    // 로고가 조용히 옅어진 뒤 가림막 전체가 균일하게 사라집니다.
+    brand.style.opacity = 1 - ease(clamp((elapsed - hold) / 650));
+    skip.style.opacity = 1 - ease(clamp((elapsed - hold) / 450));
+    curtain.style.opacity = 1 - ease(clamp((elapsed - hold - 180) / (duration - 180)));
     if (progress >= 1) finish();
     else frame = requestAnimationFrame(tick);
   }
