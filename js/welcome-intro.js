@@ -6,8 +6,7 @@
   if (document.documentElement.classList.contains('space-arrival')) return;
   const navigationType = performance.getEntriesByType('navigation')[0]?.type;
   const isReload = navigationType === 'reload';
-  if (reduced.matches ||
-      (location.hash && location.hash !== '#top') ||
+  if ((location.hash && location.hash !== '#top') ||
       navigationType === 'back_forward') return;
 
   const root = document.documentElement;
@@ -41,8 +40,10 @@
   const strokes = [...logo.children];
   const curtain = entry.querySelector('.aica-welcome__curtain');
   const skip = entry.querySelector('button');
-  const hold = 2100;
-  const duration = 1100;
+  // 동작 줄이기 환경도 브랜드 인사는 표시하되, 로고 드로잉은 생략합니다.
+  const quiet = reduced.matches;
+  const hold = quiet ? 1000 : 2100;
+  const duration = quiet ? 180 : 1100;
   const clamp = value => Math.min(1, Math.max(0, value));
   const ease = value => value * value * (3 - 2 * value);
 
@@ -86,7 +87,9 @@
     if (finished) return;
     const hero = document.querySelector('.hero');
     const heroVisible = hero && hero.getBoundingClientRect().bottom > (document.querySelector('.site-header')?.offsetHeight || 0);
-    if (window.scrollY > 4 && (!isReload || !heroVisible)) { finish(); return; }
+    if (isReload && window.scrollY > 4 && !heroVisible) { finish(); return; }
+    // 주소 입력으로 진입할 때 복원된 스크롤 위치가 인트로를 취소하지 않게 합니다.
+    if (!isReload) window.scrollTo({top: 0, behavior: 'instant'});
     for (const child of document.body.children) {
       if (child === entry || ['SCRIPT', 'LINK', 'STYLE'].includes(child.tagName)) continue;
       siblings.set(child, child.inert);
@@ -100,9 +103,9 @@
     if (start === null) start = now;
     const elapsed = now - start;
     const progress = clamp((elapsed - hold) / duration);
-    word.style.opacity = ease(clamp(elapsed / 260));
-    name.style.opacity = ease(clamp((elapsed - 160) / 280));
-    const drawn = clamp((elapsed - 200) / 1600);
+    word.style.opacity = quiet ? 1 : ease(clamp(elapsed / 260));
+    name.style.opacity = quiet ? 1 : ease(clamp((elapsed - 160) / 280));
+    const drawn = quiet ? 1 : clamp((elapsed - 200) / 1600);
     strokes.forEach((stroke, index) => {
       const part = clamp(drawn * strokes.length - index);
       stroke.style.strokeDashoffset = String(100 * (1 - part));
@@ -111,9 +114,9 @@
     const value = Math.round(drawn * 100);
     brand.setAttribute('aria-valuenow', String(value));
     // 로고가 조용히 옅어진 뒤 가림막 전체가 균일하게 사라집니다.
-    brand.style.opacity = 1 - ease(clamp((elapsed - hold) / 650));
-    skip.style.opacity = 1 - ease(clamp((elapsed - hold) / 450));
-    curtain.style.opacity = 1 - ease(clamp((elapsed - hold - 180) / (duration - 180)));
+    brand.style.opacity = 1 - ease(clamp((elapsed - hold) / (quiet ? duration : 650)));
+    skip.style.opacity = 1 - ease(clamp((elapsed - hold) / (quiet ? duration : 450)));
+    curtain.style.opacity = 1 - ease(clamp((elapsed - hold - (quiet ? 0 : 180)) / (quiet ? duration : duration - 180)));
     if (progress >= 1) finish();
     else frame = requestAnimationFrame(tick);
   }

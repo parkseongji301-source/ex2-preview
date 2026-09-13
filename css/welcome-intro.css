@@ -64,6 +64,5 @@ html.aica-welcoming { overflow: hidden; scrollbar-gutter: auto; }
   .aica-welcome__skip { right: 20px; bottom: max(20px, env(safe-area-inset-bottom)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .aica-welcome { display: none; }
-  html.aica-welcoming { overflow: revert; scrollbar-gutter: auto; }
+  .aica-welcome__brand { transition: none; }
 }
