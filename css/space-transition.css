@@ -1,0 +1,26 @@
+/* 두 화면의 공통 기준점: 같은 위치의 워드마크와 차분한 본문 전환. */
+@view-transition{navigation:auto}
+.home-page .site-header .brand b,.archive-page .site-header .brand b{position:static;transform:none;color:#003f85;display:inline-flex;align-items:center;gap:6px;font-size:32px;line-height:1;font-weight:850;letter-spacing:-2px;view-transition-name:aica-brand;z-index:30}
+.home-page .site-header .brand-symbol,.archive-page .site-header .archive-brand-symbol{width:36px;height:29px;flex:none}
+.home-page .site-header .brand,.archive-page .site-header .brand{position:relative;min-height:40px;padding-left:0;gap:16px}
+.archive-page .header-inner{height:96px}
+.site-header .brand b{cursor:pointer}
+::view-transition-group(aica-brand){animation-duration:.28s;animation-timing-function:ease}
+::view-transition-old(aica-brand),::view-transition-new(aica-brand){mix-blend-mode:normal;animation-duration:.28s}
+::view-transition-old(root){animation:space-out .28s ease both}
+::view-transition-new(root){animation:space-in .34s ease both}
+@keyframes space-out{to{opacity:0}}
+@keyframes space-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.space-opening .hero-cta-arrow svg{animation:space-ring .32s ease-out both}
+@keyframes space-ring{from{stroke-dasharray:21 4;stroke-dashoffset:-2}to{stroke-dasharray:100 0;stroke-dashoffset:-102}}
+.space-opening{cursor:progress}
+.space-arrival main{animation:space-in .3s ease both}
+@media(max-width:1200px){.home-page .site-header .brand b,.archive-page .site-header .brand b{font-size:28px}.home-page .site-header .brand-symbol,.archive-page .site-header .archive-brand-symbol{width:32px;height:26px}}
+
+@media(max-width:700px){.home-page .site-header .brand b,.archive-page .site-header .brand b{left:0}.home-page .site-header .brand,.archive-page .site-header .brand{padding-left:0;gap:12px}}
+@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}.space-arrival main,.space-opening .hero-cta-arrow svg{animation:none}}
+
+/* The shared logo follows the centre of each navigation row. */
+.home-page .site-header.is-content-header .brand-symbol{filter:none;opacity:1}
+@media(max-width:700px){.archive-page .header-inner{height:78px}}
+@media(max-width:600px){.archive-page .header-inner{height:48px}}

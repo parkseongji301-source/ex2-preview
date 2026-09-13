@@ -1,0 +1,69 @@
+/* 실제 히어로 위의 단일 가림막. 기존 화면의 배치·이미지는 바꾸지 않습니다. */
+html.aica-welcoming { overflow: hidden; scrollbar-gutter: auto; }
+.aica-welcome {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  isolation: isolate;
+  color: #fff;
+  font-family: var(--kr);
+  overscroll-behavior: none;
+  touch-action: none;
+}
+.aica-welcome__curtain { position: absolute; inset: 0; width: 100%; height: 100%; }
+.aica-welcome__brand {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  white-space: nowrap;
+}
+.aica-welcome__word {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  font-size: clamp(66px, 8vw, 112px);
+  font-weight: 750;
+  letter-spacing: -.055em;
+  line-height: 1;
+}
+.aica-welcome__name {
+  margin: 22px 0 0;
+  color: #d4dfe9;
+  font-size: 12px;
+  font-weight: 450;
+  letter-spacing: .2em;
+}
+.aica-welcome__logo {
+  display: block;
+  width: 1em;
+  height: .8em;
+  overflow: visible;
+  fill: white;
+  stroke: white;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  flex: none;
+}
+.aica-welcome__skip {
+  position: absolute;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  right: max(28px, env(safe-area-inset-right));
+  padding: 10px 0 10px 16px;
+  border: 0;
+  background: none;
+  color: #d4dfe9;
+  font: 400 11px/1.5 var(--kr);
+  letter-spacing: .03em;
+}
+.aica-welcome__skip:hover { color: #fff; }
+.aica-welcome__skip:focus-visible { opacity: 1 !important; outline: 1px solid #fff; outline-offset: 5px; }
+@media (max-width: 700px) {
+  .aica-welcome__name { font-size: 10px; margin-top: 18px; }
+  .aica-welcome__skip { right: 20px; bottom: max(20px, env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aica-welcome { display: none; }
+  html.aica-welcoming { overflow: revert; scrollbar-gutter: auto; }
+}

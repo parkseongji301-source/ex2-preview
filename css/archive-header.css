@@ -1,0 +1,17 @@
+.archive-page .site-header{position:sticky;top:0;z-index:10;height:auto;background:var(--paper);border-bottom:1px solid var(--line)}
+.archive-page .header-inner{height:80px}
+.archive-page .brand b,.archive-page .footer-brand{display:inline-flex;align-items:center;gap:10px}
+.archive-page .archive-brand-symbol{width:1.1em;height:.88em;object-fit:contain;flex:none}
+.archive-page .archive-question-bar{padding-block:0 16px}
+.archive-page #question-filters{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;border:0}
+.archive-page #question-filters button{padding:9px 12px;font-size:12px;line-height:1.5;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:3px;white-space:nowrap}
+.archive-page #question-filters button:hover{color:var(--blue);border-color:var(--blue)}
+.archive-page #question-filters button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.archive-page #questions,.archive-page #featured-story,.archive-page #reading-title{scroll-margin-top:calc(var(--archive-header-height,180px) + 20px)}
+.archive-page .reading-aside{top:calc(var(--archive-header-height,180px) + 24px)}
+@media(max-width:700px){
+ .archive-page .header-inner{height:68px}
+ .archive-page .archive-question-bar{padding-bottom:12px}
+ .archive-page #question-filters{flex-wrap:nowrap;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+ .archive-page #question-filters button{flex:none;font-size:11px;padding:9px 10px}
+}

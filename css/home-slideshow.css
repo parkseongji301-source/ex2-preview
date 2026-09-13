@@ -1,0 +1,35 @@
+/* 큰 배경과 기존 타이포그래피 안에서 네 장면을 순환합니다. */
+html{scrollbar-width:none}
+.home-page .site-header .brand b{display:inline-flex;align-items:center;gap:10px}
+.home-page .site-header .brand-symbol{width:44px;height:35px;object-fit:contain;flex:none}
+@media(max-width:700px){.home-page .site-header .brand b{gap:7px}.home-page .site-header .brand-symbol{width:36px;height:29px}}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
+.hero-cta{border:1px solid #ffffffb3;border-radius:999px;padding:16.8px 33.6px;font-size:21.6px;gap:64.8px;transition:background .2s,border-color .2s}
+.hero-cta:hover{background:#ffffff18;border-color:#fff}
+.hero-cta:focus-visible{outline-color:#fff}
+.hero-cta .hero-cta-arrow{position:relative;display:inline-grid;place-items:center;width:48px;height:48px;flex:0 0 48px;font-size:27.6px;line-height:1}
+.hero-cta-arrow svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-dasharray:21 4;stroke-dashoffset:-2}
+.hero-cta:hover .hero-cta-arrow{transform:none}
+/* 소개 문구와 CTA를 분리하고, 라벨은 버튼과 하나의 묶음으로 정렬합니다. */
+.hero-copy{transform:translateY(-64px)}
+@media(max-width:700px){.hero-copy{transform:translateY(-40px)}}
+.hero-cta-group{display:flex;flex-direction:column;gap:12px;width:max-content;max-width:100%;margin-top:56px;transform:translateY(var(--cta-balance-offset,0px))}
+.hero-cta-group .hero-cta{margin-top:0}
+.hero-cta-label{margin:0;text-align:center;font-size:15.6px;font-weight:400;color:rgb(255 255 255 / 65%);line-height:1.5;white-space:nowrap}
+@media(max-width:700px){.hero-cta-group{margin-top:36px;gap:9.6px}.hero-cta-label{font-size:14.4px}.hero-cta{font-size:19.2px;gap:42px}}
+@media(max-width:380px){.hero-cta{padding-inline:16px;gap:12px}}
+.hero-scenes{position:absolute;inset:0;overflow:hidden}
+.hero-scenes .hero-photo{opacity:0;transition:opacity .8s ease;pointer-events:none}
+.hero-scenes .hero-photo.is-active{opacity:1}
+.hero-next-scene{display:flex;align-items:center;justify-content:flex-end;background:#1d394b;color:#b6d9f3;padding:5vw}
+.hero-next-scene svg{width:65%;height:90%}
+.hero-scene-controls{position:absolute;bottom:108px;left:0;display:flex;gap:2px;align-items:center;width:440px;max-width:100%}
+.hero-scene-controls button{position:relative;color:#ffffffa8;background:transparent;border:0;padding:12px 0 16px;min-width:94px;text-align:left;font:inherit;font-size:11px;cursor:pointer;letter-spacing:.06em}
+.hero-scene-controls button::before,.hero-scene-controls button::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:#ffffff40;pointer-events:none}
+.hero-scene-controls button::after{background:#fff;transform:scaleX(var(--scene-progress,0));transform-origin:left}
+.hero-scene-controls button span{margin-left:9px}
+.hero-scene-controls button{flex:1;padding-left:10px;min-width:0}
+.hero-scene-controls button[aria-pressed="true"],.hero-scene-controls button:hover{color:#fff}
+.hero-scene-controls button:focus-visible{outline:2px solid #bfd6e5;outline-offset:5px}
+@media(max-width:700px){.hero-scene-controls{bottom:119px;gap:2px;width:100%}.hero-scene-controls button{min-width:0;flex:1;font-size:9px;padding-left:6px}.hero-scene-controls button span{margin-left:4px}.hero-next-scene svg{width:100%}.hero-copy{padding-bottom:170px}}
+@media(prefers-reduced-motion:reduce){.hero-scenes .hero-photo{transition:none}}
