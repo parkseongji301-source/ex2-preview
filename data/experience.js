@@ -13,7 +13,7 @@ window.AICA_EXPERIENCE = {
     {id:'festival',category:'live',label:'LIVE · 3기',title:'같은 문제 앞에,\n함께 모인 사람들.',description:'노트북을 펼치고 함께 참여한 코딩 페스티벌의 하루.',image:'assets/images/festival.jpg',alt:'함께 문제를 푸는 3기 코딩 페스티벌 참여 교육생들',caption:'3기 Coding Festival 현장 · 2022',detail:'노트북을 펼쳐 놓고 다 같이 참여한 3기 코딩 페스티벌의 한 장면입니다. 같은 교실에서 함께 문제를 푸는 교육생들의 모습을 담았습니다.',source:'인공지능사관학교 Coding Festival 현장 스케치 (1)',date:'2022.08.09'},
     {id:'siren',category:'project',label:'RESULT · 5기',title:'CCTV 속 움직임에서\n보행자의 낙상을 찾아내다.',description:'SIREN 팀 · 컴퓨터 비전 프로젝트',detail:'5기 성과발표회 기록에서 확인한 보행자 낙상 감지 모델입니다. 팀의 실제 결과물 이미지와 제작 과정은 자료 확보 후 추가할 예정입니다.',source:'5기 성과발표회 기록',note:'결과물 이미지 준비 중'},
     {id:'hsh',category:'project',label:'RESULT · 5기',title:'복약과 건강 관리를 돕는\n케어 챗봇, 알타리.',description:'HSH Crew · 대화형 AI 프로젝트',detail:'5기 성과발표회에 소개된 케어 챗봇 프로젝트입니다. 서비스 화면과 팀의 구체적인 제작 과정은 자료 확보 후 추가할 예정입니다.',source:'5기 성과발표회 기록',note:'결과물 이미지 준비 중'},
-    {id:'archive-guide',category:'notice',label:'NOTICE',title:'입교 전 궁금한 것들을\n교육생의 이야기로 만나보세요.',description:'수업과 팀 활동, 생활에 관한 공개 기록을 질문별로 모았습니다.',href:'story.html#questions'}
+    {id:'archive-guide',category:'notice',label:'NOTICE',title:'입교 전 궁금한 것들을\n교육생의 이야기로 만나보세요.',description:'수업과 팀 활동, 생활에 관한 공개 기록을 질문별로 모았습니다.',href:'story.html?v=ed0c495#questions'}
   ],
   questions: [
     {id:'all',label:'전체'},{id:'class',label:'수업은 어려울까?'},{id:'beginner',label:'비전공자도 괜찮을까?'},{id:'team',label:'팀 활동은 실제로 어떨까?'},{id:'day',label:'하루는 어떻게 보낼까?'},{id:'gwangju',label:'광주 생활은 어떨까?'},{id:'support',label:'어떤 지원을 받을까?'},{id:'project',label:'프로젝트는 무엇을 만들까?'},{id:'career',label:'취업까지 어떻게 이어질까?'}
