@@ -84,7 +84,15 @@
     document.querySelector('#reader-content').innerHTML = '<p class="reader-meta">'+esc(item.person)+' · '+esc(meta(original))+'</p><h2 id="dialog-title">'+esc(item.title)+'</h2><p>'+esc(original.summary)+'</p>'+(item.extra ? '<p>'+esc(item.extra)+'</p>' : '')+'<p class="reader-note">공개 수료 후기의 요약본입니다. 전체 경험담은 원문에서 확인할 수 있습니다. 날짜는 아카이브 등록일입니다.</p><a href="https://ai-school-archive.pages.dev/" target="_blank" rel="noopener noreferrer">공개 아카이브에서 원문 찾기 ↗</a><p class="reader-note">수료 후기 게시판 · 작성자 '+esc(item.person)+' · '+esc(original.date)+'</p>';
     dialog.showModal();
   }
-  questionFeed.addEventListener('click', event => { const button = event.target.closest('[data-story]'); if (button) openStory(button.dataset.story, button); });
+  questionFeed.addEventListener('click', event => {
+    const button = event.target.closest('[data-story]');
+    if (!button) return;
+    // 시안 단계에서는 새 글을 열지 않고 첫 화면으로 돌아갑니다.
+    const title = document.querySelector('#archive-title');
+    title.setAttribute('tabindex', '-1');
+    title.focus({preventScroll: true});
+    window.scrollTo({top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+  });
   document.querySelector('#reader-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } });
   dialog.addEventListener('close', () => { if (opener?.isConnected) opener.focus(); });

@@ -38,8 +38,8 @@
 .archive-page .question-content h3{font-size:21px;line-height:1.5;font-weight:600}
 .archive-page .question-content p{font-size:14px;line-height:1.8;margin-top:6px}
 .archive-page .question-card>.question-arrow{display:none}
-.archive-page .question-card>button{grid-column:3;grid-row:1/3;align-self:center;font-size:12px;padding:9px 0;white-space:nowrap}
-.archive-page .question-card>button:hover{color:var(--blue);border-color:var(--blue)}
+.archive-page .question-card>button{grid-column:3;grid-row:1/3;align-self:center;font-size:15px;font-weight:600;min-height:48px;padding:12px 22px;border:1px solid var(--line);border-radius:999px;background:transparent;white-space:nowrap}
+.archive-page .question-card>button:hover{color:var(--blue);border-color:var(--blue);background:#225bdf08}
 .archive-page .bridge{padding-block:64px}
 .archive-page .bridge-inner{align-items:center;gap:40px}
 .archive-page .bridge h2{font-size:32px;line-height:1.4}
