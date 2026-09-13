@@ -1,0 +1,85 @@
+/* 아카이브 전용: 공통 홈 화면에는 영향을 주지 않습니다. */
+.archive-page .site-header .header-inner{height:80px;display:flex;align-items:center;gap:28px}
+.archive-page .site-header .brand{flex:none}
+.archive-page .archive-question-bar{flex:1;min-width:0;padding:0}
+.archive-page #question-filters{flex-wrap:nowrap;gap:4px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent;padding:8px 2px}
+.archive-page #question-filters button{flex:none;border-color:transparent;border-radius:4px;padding:10px 9px;font-size:12px;transition:background .15s,color .15s}
+.archive-page #question-filters button:hover{background:#e9edf1;border-color:transparent}
+.archive-page #question-filters button[aria-pressed="true"]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.archive-page #question-filters button:focus-visible{outline-offset:-2px}
+.archive-page .archive-cover{padding-top:26px}
+.archive-page .archive-masthead{align-items:center;gap:20px}
+.archive-page .cover-layout{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:64px;padding:36px 0 32px}
+.archive-page .cover-copy h1{font-size:clamp(32px,3.1vw,46px);line-height:1.4;margin:20px 0 24px;font-weight:600}
+.archive-page .cover-lead{font-size:15px;line-height:1.9}
+.archive-page .person-line{margin:24px 0 18px;gap:12px}
+.archive-page .cover-photo{min-width:0}
+.archive-page .cover-photo img{height:clamp(360px,36vw,500px);aspect-ratio:auto;object-fit:cover;object-position:53% 58%;border-radius:6px}
+.archive-page .cover-photo figcaption{font-size:11px;margin-top:10px}
+.archive-page .cover-bottom{align-items:center;margin-bottom:0;padding:22px 0 32px;font-size:12px;gap:20px}
+.archive-page .reading-section{padding-block:80px;border-block:1px solid var(--line)}
+.archive-page .reading-layout{max-width:1100px;grid-template-columns:210px minmax(0,710px);gap:64px;justify-content:space-between}
+.archive-page .reading-aside{border-top:2px solid var(--ink);padding-top:20px}
+.archive-page .reading-body h2{font-size:clamp(30px,3vw,38px);line-height:1.4}
+.archive-page .editor-note{line-height:1.8;font-size:12px;margin-bottom:32px}
+.archive-page .reading-body h3{margin:40px 0 16px;font-size:22px}
+.archive-page .reading-body p:not(.eyebrow):not(.editor-note){line-height:1.95}
+.archive-page .reading-body figure img{border-radius:4px}
+.archive-page .reading-summary{border-left:2px solid #a9bfd7;padding:24px 28px}
+.archive-page .reading-summary h3{margin:0 0 12px;font-size:17px}
+.archive-page .question-section{padding-block:80px}
+.archive-page .question-section .section-heading{align-items:center;margin-bottom:32px}
+.archive-page .question-section .section-heading h2{font-size:38px;line-height:1.35}
+.archive-page .result-note{margin:0;padding-bottom:16px;border-bottom:1px solid var(--ink);font-size:12px}
+.archive-page .question-card,.archive-page .question-card:first-child{grid-template-columns:160px minmax(0,1fr) auto;gap:12px 32px;padding:26px 0;align-items:center}
+.archive-page .question-person{grid-column:1;grid-row:1/3;align-self:center}
+.archive-page .question-person span{font-size:11px;line-height:1.7}
+.archive-page .question-content{grid-column:2;grid-row:1}
+.archive-page .question-content h3{font-size:21px;line-height:1.5;font-weight:600}
+.archive-page .question-content p{font-size:14px;line-height:1.8;margin-top:6px}
+.archive-page .question-card>.question-arrow{display:none}
+.archive-page .question-card>button{grid-column:3;grid-row:1/3;align-self:center;font-size:12px;padding:9px 0;white-space:nowrap}
+.archive-page .question-card>button:hover{color:var(--blue);border-color:var(--blue)}
+.archive-page .bridge{padding-block:64px}
+.archive-page .bridge-inner{align-items:center;gap:40px}
+.archive-page .bridge h2{font-size:32px;line-height:1.4}
+.archive-page .story-dialog{border:1px solid var(--line);border-radius:8px;padding:28px 40px 40px}
+.archive-page .dialog-top{position:sticky;top:-28px;background:var(--paper);z-index:1;padding-top:12px}
+@media(max-width:1040px){
+ .archive-page .site-header .header-inner{gap:20px;height:72px}
+ .archive-page .cover-layout{gap:32px}
+ .archive-page .cover-copy h1{font-size:32px}
+ .archive-page .reading-layout{grid-template-columns:170px minmax(0,1fr);gap:36px}
+ .archive-page .question-card,.archive-page .question-card:first-child{grid-template-columns:130px minmax(0,1fr);gap:12px 24px}
+ .archive-page .question-card>button{grid-column:2;grid-row:2;justify-self:start}
+}
+@media(max-width:700px){
+ .archive-page .site-header .header-inner{height:68px;gap:16px}
+ .archive-page .site-header .brand b{font-size:26px}
+ .archive-page .site-header .archive-brand-symbol{width:28px;height:24px}
+ .archive-page #question-filters button{padding:9px 10px;font-size:12px}
+ .archive-page .archive-cover{padding-top:22px}
+ .archive-page .archive-masthead{align-items:flex-start}
+ .archive-page .archive-masthead>span{text-align:right;max-width:155px;line-height:1.7}
+ .archive-page .cover-layout{grid-template-columns:1fr;padding:30px 0 24px;gap:28px}
+ .archive-page .cover-copy h1{font-size:clamp(29px,7.5vw,38px);margin:18px 0 20px}
+ .archive-page .cover-lead{font-size:14px}
+ .archive-page .cover-photo img{height:auto;aspect-ratio:1.2}
+ .archive-page .cover-photo figcaption{font-size:10px}
+ .archive-page .cover-bottom{font-size:11px;align-items:flex-start;padding:18px 0 24px}
+ .archive-page .reading-section,.archive-page .question-section{padding-block:48px}
+ .archive-page .reading-layout{grid-template-columns:1fr;gap:28px}
+ .archive-page .reading-aside{padding-top:16px;padding-bottom:16px}
+ .archive-page .reading-body h2{font-size:30px}
+ .archive-page .question-section .section-heading h2{font-size:32px}
+ .archive-page .question-card,.archive-page .question-card:first-child{grid-template-columns:minmax(0,1fr);gap:12px;padding:24px 0}
+ .archive-page .question-person{grid-column:1;grid-row:1;flex-wrap:wrap;gap:4px 12px}
+ .archive-page .question-content{grid-column:1;grid-row:2}
+ .archive-page .question-content h3{font-size:20px}
+ .archive-page .question-content p{font-size:13px}
+ .archive-page .question-card>button{grid-column:1;grid-row:3}
+ .archive-page .bridge{padding-block:40px}
+ .archive-page .bridge h2{font-size:27px}
+ .archive-page .story-dialog{padding:20px 24px 32px}
+ .archive-page .dialog-top{top:-20px}
+}
