@@ -87,8 +87,11 @@
   questionFeed.addEventListener('click', event => {
     const button = event.target.closest('[data-story]');
     if (!button) return;
-    // 시안 단계에서는 새 글을 열지 않고 첫 화면으로 돌아갑니다.
+    const story = data.stories.find(item => item.id === button.dataset.story);
+    if (!story) return;
+    // 시안에서는 선택한 제목을 표지에 반영하고 기존 예시 본문과 사진은 유지합니다.
     const title = document.querySelector('#archive-title');
+    title.textContent = story.title;
     title.setAttribute('tabindex', '-1');
     title.focus({preventScroll: true});
     window.scrollTo({top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
